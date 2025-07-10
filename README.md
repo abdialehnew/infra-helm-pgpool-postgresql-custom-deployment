@@ -8,7 +8,9 @@
 
 ## Deploy PostgreSQL HA (Install)
 Run the following command to perform the initial installation:
-
+```sh
+kubectl apply -f configMaps-postgresql.yaml -f configMaps-initdbscript.yaml
+```
 ```sh
 helm install postgresql-ha \
     --set postgresql.password=password \
