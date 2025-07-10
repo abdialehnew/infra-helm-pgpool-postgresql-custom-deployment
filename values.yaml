@@ -1,0 +1,48 @@
+postgresql:
+  pgHbaTrustAll: true
+  # maxConnections: "500"
+  configurationCM: "postgresql-custom-config"
+  # sharedPreloadLibraries: "pg_stat_statements, pgaudit, repmgr"
+  extraEnvVars:
+    - name: TZ
+      value: "Asia/Jakarta"
+  # audit:
+  #   logTimezone: "Asia/Jakarta"
+  initdbScriptsCM: "postgresql-init-extensions"
+  resources:
+    requests:
+      cpu: "1"
+      memory: "4Gi"
+    limits:
+      cpu: "4"
+      memory: "8Gi"
+
+pgpool:
+  adminUsername: pgpool
+  adminPassword: password
+  # customUsersSecret: "pgpool-secret-custom"
+  customUsers:
+    usernames: "userdb,postgres,sr_check_user"
+    passwords: "password,password,password"
+    roles:
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+
+replicaCount: 3
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: nfs-storage
+  accessMode: "ReadWriteMany"
+
+metrics:
+  enabled: true
+
+service:
+  type: ClusterIP
