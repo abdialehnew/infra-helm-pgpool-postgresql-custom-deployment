@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-init-extensions
+  namespace: database
+data:
+  01-extensions.sql: |
+    CREATE EXTENSION IF NOT EXISTS repmgr; 
+    CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+    CREATE EXTENSION IF NOT EXISTS pgaudit;
+    CREATE EXTENSION IF NOT EXISTS postgis;
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
